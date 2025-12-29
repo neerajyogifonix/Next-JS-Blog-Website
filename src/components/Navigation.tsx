@@ -1,8 +1,13 @@
+"use client";
+
 import { navItems } from "@/lib/constants";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import ThemeTogggle from "./ThemeTogggle";
 
 function Navigation() {
+  const pathname = usePathname();
+
   return (
     <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
       <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8">
@@ -17,9 +22,14 @@ function Navigation() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 ">
             {navItems.map((item) => {
+              const isActive = pathname === item.href;
               return (
                 <Link
-                  className="text-sm font-md text-muted-foreground hover:text-foreground transition-colors duration-200"
+                  className={`text-sm font-md transition-colors duration-200 ${
+                    isActive
+                      ? "text-foreground font-semibold border-b-2 border-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
                   key={item.name}
                   href={item.href}
                 >
