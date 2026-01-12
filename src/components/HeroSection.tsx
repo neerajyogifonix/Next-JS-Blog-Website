@@ -79,7 +79,7 @@ const HeroSection = () => {
                                     <div className="text-lg font-medium text-foreground">Articles</div>
                                     <div className="flex gap-6 justify-center text-sm text-muted-foreground">
                                         <div>
-                                            <div className="font-bold text-foreground">50K+</div>
+                                            <div className="font-bold text-foreground">55K+</div>
                                             <div>Readers</div>
                                         </div>
                                         <div className="w-px bg-border"></div>
