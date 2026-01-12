@@ -76,7 +76,7 @@ const HeroSection = () => {
                             <div className="bg-background/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-primary/20">
                                 <div className="text-center space-y-4">
                                     <div className="text-6xl font-bold text-primary">100+</div>
-                                    <div className="text-lg font-medium text-foreground">Articles</div>
+                                    <div className="text-lg font-medium text-foreground">Notes</div>
                                     <div className="flex gap-6 justify-center text-sm text-muted-foreground">
                                         <div>
                                             <div className="font-bold text-foreground">50K+</div>
