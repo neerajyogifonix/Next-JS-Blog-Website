@@ -34,13 +34,15 @@ jobs:
             # Run deployment script
             bash .scripts/deploy.sh
 
-      - name: Deployment Status
-        if: always()
+      - name: Deployment Success
+        if: success()
         run: |
-          if [ ${{ job.status }} == 'success' ]; then
-            echo "✅ Deployment successful!"
-            echo "🌐 Site: http://nextblog.txogavideo.in"
-          else
-            echo "❌ Deployment failed!"
-            exit 1
-          fi
+          echo "✅ Deployment successful!"
+          echo "🌐 Site: http://nextblog.txogavideo.in"
+          
+      - name: Deployment Failed
+        if: failure()
+        run: |
+          echo "❌ Deployment failed!"
+          echo "Check the logs above for details"
+          exit 1
