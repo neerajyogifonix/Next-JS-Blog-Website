@@ -1,13 +1,15 @@
-name: Deploy Next.js App
+name: Deploy Next.js App to VPS
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Allow manual trigger
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 15  # Prevent hanging workflows
 
     steps:
       - name: Checkout code
@@ -19,6 +21,26 @@ jobs:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
+          port: 22
+          command_timeout: 10m  # Timeout for deployment script
           script: |
-            cd /var/www/html/Next-JS-Blog-Website
-            .scripts/deploy.sh
+            set -e
+            echo "Connected to VPS successfully"
+            cd /var/www/html/Next-JS-Blog-Website || exit 1
+            
+            # Ensure script has execute permissions
+            chmod +x .scripts/deploy.sh
+            
+            # Run deployment script
+            bash .scripts/deploy.sh
+
+      - name: Deployment Status
+        if: always()
+        run: |
+          if [ ${{ job.status }} == 'success' ]; then
+            echo "✅ Deployment successful!"
+            echo "🌐 Site: http://nextblog.txogavideo.in"
+          else
+            echo "❌ Deployment failed!"
+            exit 1
+          fi
