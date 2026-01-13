@@ -3,7 +3,7 @@
 import { navItems } from "@/lib/constants"
 import Link from "next/link"
 import * as motion from "motion/react-client"
-import { Github, Linkedin, Twitter } from "lucide-react"
+import { Github, Linkedin, Twitter, Heart } from "lucide-react"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -27,72 +27,111 @@ const Footer = () => {
   ]
 
   return (
-    <footer className="bg-muted/50 border-t border-border/50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <footer className="relative bg-gradient-to-b from-background via-background/80 to-muted/50 border-t border-primary/10 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div 
+          animate={{ opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 6, repeat: Infinity }}
+          className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-l from-primary/10 to-transparent rounded-full blur-3xl"
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="grid md:grid-cols-4 gap-8 mb-12"
+          viewport={{ once: true }}
+          className="grid md:grid-cols-4 gap-12 mb-12"
         >
           {/* Brand Section */}
-          <div className="md:col-span-1">
-            <h3 className="text-xl font-serif font-bold text-foreground mb-4">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="md:col-span-1"
+          >
+            <h3 className="text-2xl font-serif font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent mb-4">
               Resonance
             </h3>
-            <p className="text-sm text-muted-foreground">
-              Thoughtful insights on technology, design, and creativity.
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Thoughtful insights on technology, design, and creativity. Exploring the intersection of code and human experience.
             </p>
-          </div>
+          </motion.div>
 
           {/* Navigation */}
-          <div className="md:col-span-1">
-            <h4 className="font-serif font-semibold text-foreground mb-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+            className="md:col-span-1"
+          >
+            <h4 className="font-serif font-semibold text-foreground mb-4 text-lg">
               Navigation
             </h4>
-            <nav className="flex flex-col space-y-2">
+            <nav className="flex flex-col space-y-3">
               {navItems.map((item) => (
-                <Link
+                <motion.div
                   key={item.name}
-                  href={item.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  {item.name}
-                </Link>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
               ))}
             </nav>
-          </div>
+          </motion.div>
 
           {/* Resources */}
-          <div className="md:col-span-1">
-            <h4 className="font-serif font-semibold text-foreground mb-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="md:col-span-1"
+          >
+            <h4 className="font-serif font-semibold text-foreground mb-4 text-lg">
               Resources
             </h4>
-            <nav className="flex flex-col space-y-2">
-              <a
-                href="#"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
-              >
-                Blog
-              </a>
-              <a
-                href="#"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
-              >
-                Archive
-              </a>
-              <a
-                href="#"
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
-              >
-                RSS Feed
-              </a>
+            <nav className="flex flex-col space-y-3">
+              {[
+                { name: "Blog", href: "#" },
+                { name: "Archive", href: "#" },
+                { name: "RSS Feed", href: "#" },
+              ].map((item) => (
+                <motion.div
+                  key={item.name}
+                  whileHover={{ x: 4 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <a
+                    href={item.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300 font-medium"
+                  >
+                    {item.name}
+                  </a>
+                </motion.div>
+              ))}
             </nav>
-          </div>
+          </motion.div>
 
           {/* Social Links */}
-          <div className="md:col-span-1">
-            <h4 className="font-serif font-semibold text-foreground mb-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="md:col-span-1"
+          >
+            <h4 className="font-serif font-semibold text-foreground mb-4 text-lg">
               Connect
             </h4>
             <div className="flex gap-4">
@@ -104,9 +143,12 @@ const Footer = () => {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ 
+                      scale: 1.2,
+                      backgroundColor: "var(--primary)"
+                    }}
                     whileTap={{ scale: 0.95 }}
-                    className="text-muted-foreground hover:text-primary transition-colors duration-300"
+                    className="p-2 rounded-lg bg-primary/10 text-muted-foreground hover:text-primary-foreground transition-all duration-300 border border-primary/20 hover:border-primary"
                     title={social.name}
                   >
                     <Icon className="h-5 w-5" />
@@ -114,41 +156,44 @@ const Footer = () => {
                 )
               })}
             </div>
-          </div>
+          </motion.div>
         </motion.div>
 
         {/* Divider */}
-        <div className="border-t border-border/50 mb-8" />
+        <motion.div 
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="border-t border-gradient-to-r from-transparent via-primary/50 to-transparent mb-8" 
+        />
 
         {/* Bottom Section */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-muted-foreground"
         >
-          <p>
-            © {currentYear} Resonance. All rights reserved.
+          <p className="flex items-center gap-2">
+            © {currentYear} Resonance. Made with <motion.span animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }}><Heart className="h-4 w-4 text-primary" /></motion.span>
           </p>
-          <div className="flex gap-6">
-            <a
-              href="#"
-              className="hover:text-foreground transition-colors duration-300"
-            >
-              Privacy Policy
-            </a>
-            <a
-              href="#"
-              className="hover:text-foreground transition-colors duration-300"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="#"
-              className="hover:text-foreground transition-colors duration-300"
-            >
-              Sitemap
-            </a>
+          <div className="flex gap-6 flex-wrap justify-center">
+            {[
+              { name: "Privacy Policy", href: "#" },
+              { name: "Terms of Service", href: "#" },
+              { name: "Sitemap", href: "#" },
+            ].map((item) => (
+              <motion.a
+                key={item.name}
+                href={item.href}
+                whileHover={{ color: "var(--primary)" }}
+                className="hover:text-primary transition-colors duration-300 font-medium"
+              >
+                {item.name}
+              </motion.a>
+            ))}
           </div>
         </motion.div>
       </div>

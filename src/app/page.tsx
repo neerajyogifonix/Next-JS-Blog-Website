@@ -3,6 +3,7 @@ import HeroSection from '@/components/HeroSection'
 import CategoriesSection from '@/components/CategoriesSection'
 import QuotesSection from '@/components/QuotesSection'
 import NewsletterSection from '@/components/NewsletterSection'
+import CTASection from '@/components/CTASection'
 import Footer from '@/components/Footer'
 import React from 'react'
 
@@ -16,6 +17,7 @@ function page() {
         <FeaturedSection />
         <CategoriesSection />
         <QuotesSection />
+        <CTASection />
         <NewsletterSection />
       </main>
       <Footer />
